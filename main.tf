@@ -15,3 +15,6 @@ provider "aws" {
   region     = "AWS REGION"
 }
 
+resource "aws_alb_listener" "name" {
+}
+
