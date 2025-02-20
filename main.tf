@@ -16,7 +16,5 @@ provider "aws" {
 }
 
 resource "aws_alb_listener" "name" {
-  routing_http_response_server_enabled = ""
-  load_balancer_arn = 
 }
 

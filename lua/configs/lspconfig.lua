@@ -2,8 +2,7 @@ local nvlsp = require "nvchad.configs.lspconfig"
 local lspconfig = require "lspconfig"
 
 nvlsp.defaults() -- loads nvchad's defaults
-local servers = { "html", "cssls", "gopls", "terraformls" }
-
+local servers = { "html", "cssls", "gopls", "terraformls", "gitlab_ci_ls" }
 
 -- lsps with default config
 for _, lsp in ipairs(servers) do

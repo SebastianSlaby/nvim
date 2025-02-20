@@ -14,12 +14,20 @@ return {
   },
 
   {
-  	"nvim-treesitter/nvim-treesitter",
-  	opts = {
-  		ensure_installed = {
-  			"vim", "lua", "vimdoc",
-       "html", "css", "hcl", "terraform", "go", "python"
-  		},
-  	},
-  }
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      ensure_installed = {
+        "vim",
+        "lua",
+        "vimdoc",
+        "html",
+        "css",
+        "hcl",
+        "terraform",
+        "go",
+        "python",
+        "yaml",
+      },
+    },
+  },
 }
