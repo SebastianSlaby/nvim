@@ -16,6 +16,23 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"terramate", "tm", "tm.hcl"},
+  callback = function()
+    local root_dir = vim.fs.dirname(
+      vim.fs.find({ 'terramate.tm.hcl', '.git' }, { upward = true })[1]
+    )
+    local client = vim.lsp.start({
+      name = 'terramate',
+      cmd = { 'terramate-ls' },
+      root_dir = root_dir,
+    })
+    vim.lsp.buf_attach_client(0, client)
+  end
+})
+
+
 vim.opt.rtp:prepend(lazypath)
 
 local lazy_config = require "configs.lazy"
