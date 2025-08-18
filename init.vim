@@ -50,12 +50,11 @@ nnoremap <Tab> gt      " Next tab
 nnoremap <S-Tab> gT    " Previous tab
 " terminal mode
 tnoremap <Esc> <C-\><C-n>
-" Enter resize mode, then press h/j/k/l to resize window
-nnoremap <leader>rh :vertical resize -2<CR>
-nnoremap <leader>rl :vertical resize +2<CR>
-nnoremap <leader>rk :resize +2<CR>
-nnoremap <leader>rj :resize -2<CR>
 
+nnoremap <C-S-h> :vertical resize -2<CR>
+nnoremap <C-S-l> :vertical resize +2<CR>
+nnoremap <C-S-k> :resize +2<CR>
+nnoremap <C-S-j> :resize -2<CR>
 
 
 " open file in a text by placing text and gf

@@ -9,6 +9,7 @@ vim.cmd [[
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'waiting-for-dev/ergoterm.nvim'
+  Plug 'anuvyklack/hydra.nvim'
   call plug#end()
 ]]
 
@@ -47,3 +48,18 @@ require("ergoterm").setup()
 
 
 local opts = { noremap = true, silent = true }
+
+
+local Hydra = require('hydra')
+Hydra({
+  name = 'Resize windows',
+  mode = 'n',
+  body = '<leader>r',
+  heads = {
+    { 'h',  '<C-w><', { desc = 'shrink width' } },
+    { 'l',  '<C-w>>', { desc = 'increase width' } },
+    { 'k',  '<C-w>+', { desc = 'increase height' } },
+    { 'j',  '<C-w>-', { desc = 'decrease height' } },
+    { 'q',  nil,      { exit = true, desc = 'quit' } }
+  }
+})
