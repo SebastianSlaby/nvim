@@ -57,6 +57,10 @@ nnoremap <C-S-k> :resize +2<CR>
 nnoremap <C-S-j> :resize -2<CR>
 
 
+let mapleader=" "
+nnoremap <leader>n :NvimTreeToggle<CR>
+
+
 " open file in a text by placing text and gf
 nnoremap gf :vert winc f<cr>
 " copies filepath to clipboard by pressing yf
