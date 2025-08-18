@@ -45,6 +45,9 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" Tabs
+nnoremap <Tab> gt      " Next tab
+nnoremap <S-Tab> gT    " Previous tab
 
 
 " open file in a text by placing text and gf
@@ -61,7 +64,4 @@ endif
 
 
 lua require('claude-code').setup()
-
-" Start NERDTree and leave the cursor in it
-autocmd VimEnter * NERDTree
 
