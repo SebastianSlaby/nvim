@@ -22,15 +22,12 @@ set ttyfast                 " Speed up scrolling in Vim
 " set spell                 " enable spell check (may need to download language package)
 " set noswapfile            " disable creating swap file
 " set backupdir=~/.cache/vim " Directory to store backup files.
-call plug#begin()
+"
 
-" List your plugins here
-Plug 'tpope/vim-sensible'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'greggh/claude-code.nvim'
-call plug#end()
+
+lua require('plugins')
+
+lua require('lsp')
  
 
 " move line or visually selected block - alt+j/k
@@ -64,3 +61,7 @@ endif
 
 
 lua require('claude-code').setup()
+
+" Start NERDTree and leave the cursor in it
+autocmd VimEnter * NERDTree
+
