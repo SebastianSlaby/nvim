@@ -13,6 +13,9 @@ vim.cmd [[
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'dstein64/nvim-scrollview'
+  Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
+  " Plug 'ryanoasis/vim-devicons' Icons without colours
+  Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
   call plug#end()
 ]]
 
@@ -159,3 +162,12 @@ vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find f
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+
+vim.opt.termguicolors = true
+require("bufferline").setup {
+  options = {
+    -- optional: other custom options
+  }
+}
+
+vim.cmd [[highlight BufferLineIndicatorSelected guifg=#FF7A93 guibg=#24283b gui=underline]]
