@@ -12,6 +12,7 @@ set autoindent              " indent a new line the same amount as the line just
 set number                  " add line numbers
 set wildmode=longest,list   " get bash-like tab completions
 set cc=80                  " set an 80 column border for good coding style
+set splitright
 filetype plugin indent on   "allow auto-indenting depending on file type
 syntax on                   " syntax highlighting
 set mouse=a                 " enable mouse click
@@ -65,7 +66,7 @@ nnoremap <Space>3 3gt
 " ... etc.
 
 let mapleader=" "
-nnoremap <leader>n :NvimTreeToggle<CR>
+nnoremap <C-n> :NvimTreeToggle<CR>
 
 
 " open file in a text by placing text and gf
@@ -81,5 +82,5 @@ if has("autocmd")
 endif
 
 
-lua require('claude-code').setup()
+"lua require('claude-code').setup()
 
