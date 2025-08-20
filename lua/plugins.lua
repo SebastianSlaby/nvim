@@ -12,6 +12,7 @@ vim.cmd [[
   Plug 'anuvyklack/hydra.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'dstein64/nvim-scrollview'
   call plug#end()
 ]]
 
