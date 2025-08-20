@@ -50,12 +50,19 @@ nnoremap <Tab> gt      " Next tab
 nnoremap <S-Tab> gT    " Previous tab
 " terminal mode
 tnoremap <Esc> <C-\><C-n>
-
+" resizing
 nnoremap <C-S-h> :vertical resize -2<CR>
 nnoremap <C-S-l> :vertical resize +2<CR>
 nnoremap <C-S-k> :resize +2<CR>
 nnoremap <C-S-j> :resize -2<CR>
 
+" jump between tabs
+
+nnoremap <Space>1 1gt
+nnoremap <Space>2 2gt
+nnoremap <Space>3 3gt
+
+" ... etc.
 
 let mapleader=" "
 nnoremap <leader>n :NvimTreeToggle<CR>
