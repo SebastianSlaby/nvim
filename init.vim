@@ -1,3 +1,4 @@
+let mapleader=" "
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
@@ -65,7 +66,6 @@ nnoremap <Space>3 3gt
 
 " ... etc.
 
-let mapleader=" "
 nnoremap <C-n> :NvimTreeToggle<CR>
 
 
