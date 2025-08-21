@@ -17,6 +17,7 @@ vim.cmd [[
   Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
   Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
   Plug 'qpkorr/vim-bufkill'
+  Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
   call plug#end()
 ]]
 
@@ -36,6 +37,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 
+local term = lua require("toggleterm").setup()
 
 
 local opts = { noremap = true, silent = true }
