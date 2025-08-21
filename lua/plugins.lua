@@ -6,7 +6,7 @@ vim.cmd [[
   Plug 'nvim-lua/plenary.nvim'
   Plug 'greggh/claude-code.nvim'
   Plug 'neovim/nvim-lspconfig'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'}
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'anuvyklack/hydra.nvim'
   Plug 'nvim-lua/plenary.nvim'
@@ -18,8 +18,17 @@ vim.cmd [[
   Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
   Plug 'qpkorr/vim-bufkill'
   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'folke/tokyonight.nvim'
   call plug#end()
 ]]
+
+require'nvim-treesitter.configs'.setup { ... }
 
 
 vim.api.nvim_create_autocmd("VimEnter", {
@@ -176,3 +185,6 @@ vim.cmd [[highlight BufferLineIndicatorSelected guifg=#FF7A93 guibg=#24283b gui=
 local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
+
+
+vim.cmd[[colorscheme tokyonight]]
