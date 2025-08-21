@@ -1,10 +1,11 @@
 -- lsp.lua
 local lspconfig = require("lspconfig")
 lspconfig.gopls.setup({})
+lspconfig.jsonls.setup({})
 
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*.go",
+  pattern = "*",
   callback = function()
     vim.lsp.buf.format({async = false})
   end
@@ -92,3 +93,11 @@ require'nvim-treesitter.configs'.setup {
     additional_vim_regex_highlighting = false,
   },
 }
+
+vim.diagnostic.config({
+  virtual_text = true,      -- show inline diagnostic text
+  signs = true,             -- keep gutter signs W/H/etc.
+  underline = true,         -- underline problematic code
+  update_in_insert = false, -- show only in normal mode (optional)
+})
+

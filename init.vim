@@ -1,8 +1,11 @@
+let mapleader=" "
+
 lua require('plugins')
 lua require('lsp')
+lua require('completion')
 
 
-let mapleader=" "
+
 set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
