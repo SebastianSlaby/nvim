@@ -8,7 +8,6 @@ vim.cmd [[
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'nvim-tree/nvim-tree.lua'
-  Plug 'waiting-for-dev/ergoterm.nvim'
   Plug 'anuvyklack/hydra.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
@@ -16,6 +15,8 @@ vim.cmd [[
   Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
   " Plug 'ryanoasis/vim-devicons' Icons without colours
   Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+  Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+  Plug 'qpkorr/vim-bufkill'
   call plug#end()
 ]]
 
@@ -28,14 +29,9 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-      vim.cmd("tabnew")        -- Creates a new tab
-      vim.cmd("terminal")      -- Opens default shell in terminal in this tab
       vim.cmd("tabfirst")      -- Returns focus to the first tab
   end,
 })
-
-
-require("ergoterm").setup()
 
 
 
@@ -171,3 +167,10 @@ require("bufferline").setup {
 }
 
 vim.cmd [[highlight BufferLineIndicatorSelected guifg=#FF7A93 guibg=#24283b gui=underline]]
+
+
+
+
+local map = vim.keymap.set
+local opts = { noremap = true, silent = true }
+

@@ -48,8 +48,11 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " Tabs
-nnoremap <Tab> gt      " Next tab
-nnoremap <S-Tab> gT    " Previous tab
+"nnoremap <Tab> gt      " Next tab
+"nnoremap <S-Tab> gT    " Previous tab
+"
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 " terminal mode
 tnoremap <Esc> <C-\><C-n>
 " resizing
@@ -68,6 +71,7 @@ nnoremap <Space>3 3gt
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 
+nnoremap <leader>bd :BD<CR>
 
 " open file in a text by placing text and gf
 nnoremap gf :vert winc f<cr>
@@ -83,4 +87,3 @@ endif
 
 
 "lua require('claude-code').setup()
-
