@@ -3,7 +3,6 @@ vim.cmd [[
   call plug#begin()
   Plug 'tpope/vim-sensible'
   Plug 'ryanoasis/vim-devicons'
-  Plug 'nvim-lua/plenary.nvim'
   Plug 'greggh/claude-code.nvim'
   Plug 'neovim/nvim-lspconfig'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate', 'branch': 'master'}
@@ -28,6 +27,8 @@ vim.cmd [[
   Plug 'mason-org/mason.nvim'
   Plug 'mason-org/mason-lspconfig.nvim'
   Plug 'm4xshen/autoclose.nvim'
+  Plug 'anurag3301/nvim-platformio.lua'
+  Plug 'akinsho/nvim-toggleterm.lua'
   call plug#end()
 ]]
 
@@ -196,7 +197,7 @@ vim.cmd [[colorscheme tokyonight]]
 
 require("mason").setup()
 require("mason-lspconfig").setup {
-    ensure_installed = { "lua_ls", "rust_analyzer", "gopls", "jsonls", "jinja-lsp" },
+    ensure_installed = { "lua_ls", "rust_analyzer", "gopls", "jsonls" },
 }
 
 --local lspconfig = require('lspconfig')
