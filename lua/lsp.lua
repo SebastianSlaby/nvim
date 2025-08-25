@@ -33,8 +33,8 @@ if not configs.jinja_lsp then
             end,
             init_options = {
                 templates = './templates', -- your templates folder
-                backend = { './src' }, -- backend directory if applicable
-                lang = "rust"      -- or "python" depending on your backend
+                backend = { './src' },     -- backend directory if applicable
+                lang = "rust"              -- or "python" depending on your backend
             },
         },
     }
@@ -117,8 +117,8 @@ require 'nvim-treesitter.configs'.setup {
 }
 
 vim.diagnostic.config({
-    virtual_text = true,    -- show inline diagnostic text
-    signs = true,           -- keep gutter signs W/H/etc.
-    underline = true,       -- underline problematic code
+    virtual_text = true,      -- show inline diagnostic text
+    signs = true,             -- keep gutter signs W/H/etc.
+    underline = true,         -- underline problematic code
     update_in_insert = false, -- show only in normal mode (optional)
 })
