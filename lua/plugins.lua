@@ -2,6 +2,7 @@
 vim.cmd [[
   call plug#begin()
   Plug 'tpope/vim-sensible'
+  Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'greggh/claude-code.nvim'
   Plug 'neovim/nvim-lspconfig'
@@ -243,11 +244,3 @@ require('telescope').setup {
     max_results = 10000,
   }
 }
-
-local pok, platformio = pcall(require, 'platformio')
-if pok then
-  platformio.setup({
-    lsp = 'clang',
-    menu_key = '<leader>\\', -- replace this menu key  to your convenience
-  })
-end
