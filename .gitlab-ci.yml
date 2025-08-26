@@ -1,0 +1,15 @@
+stages:
+  - build
+  - test
+
+build-job:
+  stage: build
+  script:
+    - echo "Building the project"
+  
+test-job:
+  stage: test
+  script:
+    - echo "Running tests"
+  dependencies:
+    - build-job

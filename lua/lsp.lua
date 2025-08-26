@@ -3,6 +3,19 @@ local lspconfig = require("lspconfig")
 --lspconfig.gopls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.terraformls.setup({})
+lspconfig.yamlls.setup({
+  settings = {
+    yaml = {
+      schemas = {
+        ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml"
+      },
+      validate = true,
+      completion = true,
+      hover = true,
+    }
+  },
+  filetypes = { "yaml", "yaml.gitlab" }
+})
 
 
 vim.api.nvim_create_autocmd("BufWritePre", {
@@ -17,6 +30,12 @@ vim.filetype.add {
     jinja = 'jinja',
     jinja2 = 'jinja',
     j2 = 'jinja',
+  },
+  filename = {
+    ['.gitlab-ci.yml'] = 'yaml.gitlab',
+  },
+  pattern = {
+    ['.*%.gitlab%-ci%.ya?ml'] = 'yaml.gitlab',
   },
 }
 
