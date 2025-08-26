@@ -75,7 +75,7 @@ nnoremap <Space>3 3gt
 nnoremap <C-n> :NvimTreeToggle<CR>
 
 nnoremap <leader>w :BD<CR>
-nnoremap <leader>t :ToggleTerm direction=vertical size=100<CR>
+nnoremap <C-.> :ToggleTerm direction=vertical size=100<CR>
 
 " open file in a text by placing text and gf
 nnoremap gf :vert winc f<cr>
