@@ -2,6 +2,7 @@
 vim.cmd [[
   call plug#begin()
   Plug 'tpope/vim-sensible'
+  Plug 'APZelos/blamer.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'ryanoasis/vim-devicons'
   Plug 'greggh/claude-code.nvim'
@@ -53,6 +54,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 local term = lua
+vim.g.blamer_enabled = true
 require("toggleterm").setup()
 
 
@@ -244,3 +246,8 @@ require('telescope').setup {
     max_results = 10000,
   }
 }
+
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = "*",
+  command = "wincmd =",
+})
