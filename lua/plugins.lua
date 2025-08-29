@@ -251,3 +251,21 @@ vim.api.nvim_create_autocmd("VimResized", {
   pattern = "*",
   command = "wincmd =",
 })
+
+
+-- show diagnostics in a floating window under the cursor
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = "Open diagnostics float" })
+
+vim.keymap.set('n', '<leader>q', function()
+  vim.diagnostic.setqflist({ open = true })
+end, { desc = "Diagnostics → quickfix" })
+
+
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "]q", ":cnext<CR>:wincmd p<CR>", { buffer = true, desc = "Quickfix next (stay in qf)" })
+    vim.keymap.set("n", "[q", ":cprev<CR>:wincmd p<CR>", { buffer = true, desc = "Quickfix prev (stay in qf)" })
+  end,
+})
