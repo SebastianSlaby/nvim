@@ -2,6 +2,7 @@
 vim.cmd [[
   call plug#begin()
   Plug 'tpope/vim-sensible'
+  Plug 'tpope/vim-fugitive'
   Plug 'APZelos/blamer.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'ryanoasis/vim-devicons'
