@@ -3,6 +3,7 @@ vim.cmd [[
   call plug#begin()
   Plug 'tpope/vim-sensible'
   Plug 'tpope/vim-fugitive'
+  Plug 'terramate-io/vim-terramate'
   Plug 'APZelos/blamer.nvim'
   Plug 'nvim-telescope/telescope-ui-select.nvim'
   Plug 'ryanoasis/vim-devicons'
@@ -37,6 +38,11 @@ vim.cmd [[
 ]]
 
 require 'nvim-treesitter.configs'.setup { ... }
+
+
+vim.cmd([[autocmd BufRead,BufNewFile *.tm.hcl set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile *.tm set filetype=hcl]])
+vim.cmd([[autocmd BufRead,BufNewFile env.tm set filetype=hcl]])
 
 
 vim.api.nvim_create_autocmd("VimEnter", {

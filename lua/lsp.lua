@@ -7,7 +7,8 @@ lspconfig.yamlls.setup({
   settings = {
     yaml = {
       schemas = {
-        ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] = "/.gitlab-ci.yml"
+        ["https://gitlab.com/gitlab-org/gitlab/-/raw/master/app/assets/javascripts/editor/schema/ci.json"] =
+        "/.gitlab-ci.yml"
       },
       validate = true,
       completion = true,
@@ -59,6 +60,25 @@ if not configs.jinja_lsp then
     },
   }
 end
+
+
+if not configs.terramate_ls then
+  configs.terramate_ls = {
+    default_config = {
+      cmd = { "terramate-ls" },
+      filetypes = { "hcl", "terramate" }, -- match your autocmd settings
+      root_dir = lspconfig.util.root_pattern("terramate.tm.hcl", ".git"),
+      settings = {},
+    },
+  }
+end
+
+lspconfig.terramate_ls.setup {}
+require 'lspconfig'.terramate_ls.setup {
+  cmd = { "terramate-ls" },
+  filetypes = { "hcl", "terramate" }, -- include filetypes for your custom Terramate files
+  root_dir = require 'lspconfig'.util.root_pattern("terramate.tm.hcl", ".git"),
+}
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
@@ -151,6 +171,8 @@ if pok then
     menu_key = '<leader>\\', -- replace this menu key  to your convenience
   })
 end
+
+
 
 require('lspconfig').ccls.setup {
   init_options = {
