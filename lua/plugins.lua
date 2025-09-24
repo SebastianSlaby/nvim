@@ -13,6 +13,7 @@ vim.cmd [[
   Plug 'nvim-tree/nvim-tree.lua'
   Plug 'anuvyklack/hydra.nvim'
   Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope-live-grep-args.nvim'
   Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
   Plug 'dstein64/nvim-scrollview'
   Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
@@ -61,6 +62,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
 
 local term = lua
+local lga_actions = require("telescope-live-grep-args.actions")
 vim.g.blamer_enabled = true
 require("toggleterm").setup()
 
@@ -182,7 +184,10 @@ require("claude-code").setup({
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
-vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+--vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
+vim.keymap.set('n', '<leader>fg', function()
+  require('telescope').extensions.live_grep_args.live_grep_args()
+end, { desc = 'Telescope live grep with args' })
 vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
@@ -234,6 +239,18 @@ require('telescope').setup {
     selection_strategy = "reset",
     sorting_strategy = "descending",
     layout_strategy = "horizontal",
+    extensions = {
+      live_grep_args = {
+        auto_quoting = true, -- automatically quote prompt input
+      },
+      mappings = {
+        i = {
+          ["<C-k>"] = lga_actions.quote_prompt(),
+          ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+          ["<C-space>"] = lga_actions.to_fuzzy_refine,
+        },
+      },
+    },
     layout_config = {
       horizontal = {
         mirror = false,
@@ -253,6 +270,7 @@ require('telescope').setup {
     max_results = 10000,
   }
 }
+require('telescope').load_extension('live_grep_args')
 
 vim.api.nvim_create_autocmd("VimResized", {
   pattern = "*",
