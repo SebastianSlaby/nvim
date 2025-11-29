@@ -48,13 +48,28 @@ vim.cmd([[autocmd BufRead,BufNewFile env.tm set filetype=hcl]])
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
-    require("nvim-tree.api").tree.open()
-  end,
-})
+    -- Only run if no files were opened
+    if vim.fn.argc() == 0 then
+      -- Store the initial empty buffer number
+      local initial_buf = vim.api.nvim_get_current_buf()
 
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    vim.cmd("tabfirst") -- Returns focus to the first tab
+      require("nvim-tree.api").tree.open()
+
+      -- Delete the empty [No Name] buffer after nvim-tree opens
+      vim.schedule(function()
+        -- Check all buffers and delete empty unnamed ones
+        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+          if vim.api.nvim_buf_is_valid(bufnr) then
+            local bufname = vim.api.nvim_buf_get_name(bufnr)
+            local buftype = vim.bo[bufnr].buftype
+            -- Delete if it's an empty normal buffer (not modified, no name, not special)
+            if bufname == "" and buftype == "" and not vim.bo[bufnr].modified then
+              vim.api.nvim_buf_delete(bufnr, { force = true })
+            end
+          end
+        end
+      end)
+    end
   end,
 })
 
