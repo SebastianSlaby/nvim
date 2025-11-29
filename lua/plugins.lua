@@ -245,7 +245,8 @@ require('telescope').setup {
       '--line-number',
       '--column',
       '--smart-case',
-      '--max-columns=1000' -- example tweak
+      '--hidden',           -- search hidden files
+      '--max-columns=1000'  -- example tweak
     },
     prompt_prefix = "> ",
     selection_caret = "> ",
