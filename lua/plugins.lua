@@ -124,7 +124,7 @@ require("nvim-tree").setup({
   },
   view = {
     preserve_window_proportions = true,
-    side = "left",
+    side = "right",
   },
   update_focused_file = {
     enable = true,
