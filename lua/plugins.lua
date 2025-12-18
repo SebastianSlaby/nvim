@@ -20,6 +20,7 @@ vim.cmd [[
   " Plug 'ryanoasis/vim-devicons' Icons without colours
   Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
   Plug 'Exafunction/windsurf.vim', { 'branch': 'main' }
+  Plug 'github/copilot.vim'
   Plug 'qpkorr/vim-bufkill'
   Plug 'akinsho/toggleterm.nvim', {'tag' : '*'}
   Plug 'hrsh7th/nvim-cmp'
