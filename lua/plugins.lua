@@ -35,6 +35,7 @@ vim.cmd [[
   Plug 'anurag3301/nvim-platformio.lua'
   Plug 'akinsho/nvim-toggleterm.lua'
   Plug 'folke/which-key.nvim'
+  Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
   call plug#end()
 ]]
 
@@ -245,8 +246,8 @@ require('telescope').setup {
       '--line-number',
       '--column',
       '--smart-case',
-      '--hidden',           -- search hidden files
-      '--max-columns=1000'  -- example tweak
+      '--hidden',          -- search hidden files
+      '--max-columns=1000' -- example tweak
     },
     prompt_prefix = "> ",
     selection_caret = "> ",
