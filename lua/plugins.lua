@@ -81,7 +81,14 @@ vim.api.nvim_create_autocmd("VimEnter", {
 local term = lua
 local lga_actions = require("telescope-live-grep-args.actions")
 vim.g.blamer_enabled = true
-require("toggleterm").setup()
+require("toggleterm").setup({
+  direction = 'float',
+  float_opts = {
+    border = 'curved',
+    width = math.floor(vim.o.columns * 0.8),
+    height = math.floor(vim.o.lines * 0.8),
+  }
+})
 
 
 local opts = { noremap = true, silent = true }
@@ -141,7 +148,7 @@ require("claude-code").setup({
   -- Terminal window settings
   window = {
     split_ratio = 0.6,      -- Percentage of screen for the terminal window (height for horizontal, width for vertical splits)
-    position = "vertical",  -- Position of the window: "botright", "topleft", "vertical", "float", etc.
+    position = "float",     -- Position of the window: "botright", "topleft", "vertical", "float", etc.
     enter_insert = true,    -- Whether to enter insert mode when opening Claude Code
     hide_numbers = true,    -- Hide line numbers in the terminal window
     hide_signcolumn = true, -- Hide the sign column in the terminal window
