@@ -30,6 +30,9 @@ vim.cmd [[
   Plug 'hrsh7th/cmp-cmdline'
   Plug 'L3MON4D3/LuaSnip'
   Plug 'folke/tokyonight.nvim'
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'SmiteshP/nvim-navic'
   Plug 'mason-org/mason.nvim'
   Plug 'mason-org/mason-lspconfig.nvim'
   Plug 'm4xshen/autoclose.nvim'
@@ -310,6 +313,61 @@ vim.keymap.set('n', '<leader>q', function()
   vim.diagnostic.setqflist({ open = true })
 end, { desc = "Diagnostics → quickfix" })
 
+local navic = require("nvim-navic")
+
+navic.setup({
+  icons = {
+    File          = "󰈙 ",
+    Module        = " ",
+    Namespace     = "󰌗 ",
+    Package       = " ",
+    Class         = "󰌗 ",
+    Method        = "󰆧 ",
+    Property      = " ",
+    Field         = " ",
+    Constructor   = " ",
+    Enum          = "練",
+    Interface     = "練",
+    Function      = "󰊕 ",
+    Variable      = "󰆧 ",
+    Constant      = "󰏿 ",
+    String        = "󰀬 ",
+    Number        = "󰎠 ",
+    Boolean       = "◩ ",
+    Array         = "󰅪 ",
+    Object        = "󰅩 ",
+    Key           = "󰌋 ",
+    Null          = "󰟢 ",
+    EnumMember    = " ",
+    Struct        = "󰌗 ",
+    Event         = " ",
+    Operator      = "󰆕 ",
+    TypeParameter = "󰊄 ",
+  },
+  highlight = true,
+  separator = " > ",
+  depth_limit = 0,
+  depth_limit_indicator = "..",
+})
+
+require('lualine').setup({
+  options = {
+    icons_enabled = true,
+  },
+  sections = {
+    lualine_c = {
+      'filename',
+      {
+        function()
+          return require("nvim-navic").get_location()
+        end,
+        cond = function()
+          return require("nvim-navic").is_available()
+        end
+      }
+    }
+  }
+})
 
 
 vim.api.nvim_create_autocmd("FileType", {

@@ -1,9 +1,21 @@
 -- lsp.lua
 local lspconfig = require("lspconfig")
+local navic = require("nvim-navic")
+
+-- Common on_attach function to attach navic to LSP clients
+local on_attach = function(client, bufnr)
+  if client.server_capabilities.documentSymbolProvider then
+    navic.attach(client, bufnr)
+  end
+end
+
 --lspconfig.gopls.setup({})
-lspconfig.jsonls.setup({})
-lspconfig.terraformls.setup({})
+lspconfig.lua_ls.setup({ on_attach = on_attach })
+lspconfig.gopls.setup({ on_attach = on_attach })
+lspconfig.jsonls.setup({ on_attach = on_attach })
+lspconfig.terraformls.setup({ on_attach = on_attach })
 lspconfig.yamlls.setup({
+  on_attach = on_attach,
   settings = {
     yaml = {
       schemas = {
@@ -73,8 +85,9 @@ if not configs.terramate_ls then
   }
 end
 
-lspconfig.terramate_ls.setup {}
+lspconfig.terramate_ls.setup { on_attach = on_attach }
 require 'lspconfig'.terramate_ls.setup {
+  on_attach = on_attach,
   cmd = { "terramate-ls" },
   filetypes = { "hcl", "terramate" }, -- include filetypes for your custom Terramate files
   root_dir = require 'lspconfig'.util.root_pattern("terramate.tm.hcl", ".git"),
@@ -83,6 +96,7 @@ require 'lspconfig'.terramate_ls.setup {
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 nvim_lsp.jinja_lsp.setup {
+  on_attach = on_attach,
   capabilities = capabilities,
 }
 
@@ -175,6 +189,7 @@ end
 
 
 require('lspconfig').ccls.setup {
+  on_attach = on_attach,
   init_options = {
     compilationDatabaseDirectory = ".",
     index = {
