@@ -40,6 +40,10 @@ vim.cmd [[
   Plug 'akinsho/nvim-toggleterm.lua'
   Plug 'folke/which-key.nvim'
   Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+  Plug 'nvim-neotest/nvim-nio'
+  Plug 'nvim-neotest/neotest'
+  Plug 'fredrikaverpil/neotest-golang'
+  Plug 'antoinemadec/FixCursorHold.nvim'
   call plug#end()
 ]]
 
