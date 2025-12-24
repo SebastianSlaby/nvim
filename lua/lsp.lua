@@ -88,61 +88,52 @@ vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
 
-require 'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "c", "go", "python", "bash", "json", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "terraform", "hcl" },
+-- nvim-treesitter setup
+require('nvim-treesitter').setup({})
 
-  -- Install parsers synchronously (only applied to `ensure_installed`)
-  sync_install = false,
+-- Install parsers
+local parsers_to_install = { "c", "go", "python", "bash", "json", "lua", "vim", "vimdoc", "query", "markdown", "markdown_inline", "terraform", "hcl" }
 
-  -- Automatically install missing parsers when entering buffer
-  -- Recommendation: set to false if you don't have `tree-sitter` CLI installed locally
-  auto_install = true,
+-- Only install if missing to avoid startup messages
+local ts_config = require('nvim-treesitter.config')
+local installed_parsers = ts_config.get_installed()
+local missing_parsers = {}
+for _, parser in ipairs(parsers_to_install) do
+  if not vim.tbl_contains(installed_parsers, parser) then
+    table.insert(missing_parsers, parser)
+  end
+end
 
-  -- List of parsers to ignore installing (or "all")
-  ignore_install = { "javascript" },
+if #missing_parsers > 0 then
+  pcall(function() require('nvim-treesitter').install(missing_parsers) end)
+end
 
-  ---- If you need to change the installation directory of the parsers (see -> Advanced Setup)
-  -- parser_install_dir = "/some/path/to/store/parsers", -- Remember to run vim.opt.runtimepath:append("/some/path/to/store/parsers")!
-  --
-  --
-  indent = {
-    enable = true
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn", -- set to `false` to disable one of the mappings
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
+-- Enable highlighting and indent
+vim.api.nvim_create_autocmd("FileType", {
+  callback = function(args)
+    local buf = args.buf
+    
+    -- Disable for large files
+    local max_filesize = 100 * 1024 -- 100 KB
+    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+    if ok and stats and stats.size > max_filesize then
+      return
+    end
 
-  highlight = {
-    enable = true,
+    -- Disable for specific languages
+    local lang = vim.treesitter.language.get_lang(vim.bo[buf].filetype) or vim.bo[buf].filetype
+    local disabled_langs = { "c", "rust" }
+    if vim.tbl_contains(disabled_langs, lang) then
+      return
+    end
 
-    -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
-    -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is
-    -- the name of the parser)
-    -- list of language that will be disabled
-    disable = { "c", "rust" },
-    -- Or use a function for more flexibility, e.g. to disable slow treesitter highlight for large files
-    disable = function(lang, buf)
-      local max_filesize = 100 * 1024 -- 100 KB
-      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-      if ok and stats and stats.size > max_filesize then
-        return true
-      end
-    end,
+    -- Start treesitter highlighting
+    pcall(vim.treesitter.start, buf, lang)
 
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
-    -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
-    -- Using this option may slow down your editor, and you may see some duplicate highlights.
-    -- Instead of true it can also be a list of languages
-    additional_vim_regex_highlighting = false,
-  },
-}
+    -- Enable indent
+    vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
 
 vim.diagnostic.config({
   virtual_text = true,      -- show inline diagnostic text
