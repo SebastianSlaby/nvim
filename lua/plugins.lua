@@ -14,7 +14,7 @@ vim.cmd [[
   Plug 'anuvyklack/hydra.nvim'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-  Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+  Plug 'nvim-telescope/telescope.nvim', { 'branch': 'master' }
   Plug 'dstein64/nvim-scrollview'
   Plug 'nvim-tree/nvim-web-devicons' " Recommended (for coloured icons)
   " Plug 'ryanoasis/vim-devicons' Icons without colours
