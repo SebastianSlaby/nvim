@@ -1,14 +1,15 @@
 -- neotest-config.lua
-local neotest = require("neotest")
+local neotest = require "neotest"
 
-neotest.setup({
+neotest.setup {
   adapters = {
-    require("neotest-golang")({
+    require "neotest-golang" {
       go_test_args = { "-v", "-race", "-count=1" },
       dap_go_enabled = false,
-    }),
+    },
   },
   status = {
+    enabled = true,
     virtual_text = true,
     signs = true,
   },
@@ -46,7 +47,7 @@ neotest.setup({
       stop = "u",
     },
   },
-})
+}
 
 -- Keymaps for neotest
 local opts = { noremap = true, silent = true }
@@ -58,7 +59,7 @@ end, { desc = "Neotest: Run nearest test" })
 
 -- Run all tests in current file
 vim.keymap.set("n", "<leader>tf", function()
-  neotest.run.run(vim.fn.expand("%"))
+  neotest.run.run(vim.fn.expand "%")
 end, { desc = "Neotest: Run file tests" })
 
 -- Run all tests in project
@@ -83,15 +84,15 @@ end, { desc = "Neotest: Toggle output" })
 
 -- Show output panel
 vim.keymap.set("n", "<leader>tp", function()
-  neotest.output.open({ enter = true, auto_close = true })
+  neotest.output.open { enter = true, auto_close = true }
 end, { desc = "Neotest: Toggle floating output" })
 
 -- Jump to next failed test
 vim.keymap.set("n", "]t", function()
-  neotest.jump.next({ status = "failed" })
+  neotest.jump.next { status = "failed" }
 end, { desc = "Neotest: Jump to next failed" })
 
 -- Jump to previous failed test
 vim.keymap.set("n", "[t", function()
-  neotest.jump.prev({ status = "failed" })
+  neotest.jump.prev { status = "failed" }
 end, { desc = "Neotest: Jump to prev failed" })
