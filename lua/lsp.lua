@@ -1,5 +1,4 @@
 -- lsp.lua
-local lspconfig = require("lspconfig")
 local navic = require("nvim-navic")
 
 -- Common on_attach function to attach navic to LSP clients
@@ -9,12 +8,18 @@ local on_attach = function(client, bufnr)
   end
 end
 
---lspconfig.gopls.setup({})
-lspconfig.lua_ls.setup({ on_attach = on_attach })
-lspconfig.gopls.setup({ on_attach = on_attach })
-lspconfig.jsonls.setup({ on_attach = on_attach })
-lspconfig.terraformls.setup({ on_attach = on_attach })
-lspconfig.yamlls.setup({
+-- Helper for root_dir
+local function root_pattern(markers)
+  return function(fname)
+    return vim.fs.root(fname, markers)
+  end
+end
+
+vim.lsp.config('lua_ls', { on_attach = on_attach })
+vim.lsp.config('gopls', { on_attach = on_attach })
+vim.lsp.config('jsonls', { on_attach = on_attach })
+vim.lsp.config('terraformls', { on_attach = on_attach })
+vim.lsp.config('yamlls', {
   on_attach = on_attach,
   settings = {
     yaml = {
@@ -52,67 +57,36 @@ vim.filetype.add {
   },
 }
 
-local nvim_lsp = require('lspconfig')
-local configs = require('lspconfig.configs')
-
-if not configs.jinja_lsp then
-  configs.jinja_lsp = {
-    default_config = {
-      name = "jinja-lsp",
-      cmd = { 'jinja-lsp' },
-      filetypes = { 'jinja' },
-      root_dir = function(fname)
-        return '.' -- or use a more sophisticated root dir detection
-      end,
-      init_options = {
-        templates = './templates', -- your templates folder
-        backend = { './src' },     -- backend directory if applicable
-        lang = "rust"              -- or "python" depending on your backend
-      },
-    },
-  }
-end
-
-
-if not configs.terramate_ls then
-  configs.terramate_ls = {
-    default_config = {
-      cmd = { "terramate-ls" },
-      filetypes = { "hcl", "terramate" }, -- match your autocmd settings
-      root_dir = lspconfig.util.root_pattern("terramate.tm.hcl", ".git"),
-      settings = {},
-    },
-  }
-end
-
-lspconfig.terramate_ls.setup { on_attach = on_attach }
-require 'lspconfig'.terramate_ls.setup {
-  on_attach = on_attach,
-  cmd = { "terramate-ls" },
-  filetypes = { "hcl", "terramate" }, -- include filetypes for your custom Terramate files
-  root_dir = require 'lspconfig'.util.root_pattern("terramate.tm.hcl", ".git"),
-}
-
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-nvim_lsp.jinja_lsp.setup {
+vim.lsp.config('jinja_lsp', {
+  name = "jinja-lsp",
+  cmd = { 'jinja-lsp' },
+  filetypes = { 'jinja' },
+  root_dir = function(fname)
+    return '.' -- or use a more sophisticated root dir detection
+  end,
+  init_options = {
+    templates = './templates', -- your templates folder
+    backend = { './src' },     -- backend directory if applicable
+    lang = "rust"              -- or "python" depending on your backend
+  },
   on_attach = on_attach,
   capabilities = capabilities,
-}
+})
 
---local on_attach = function(client, bufnr)
---  local opts = { noremap=true, silent=true, buffer=bufnr }
---  vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+vim.lsp.config('terramate_ls', {
+  cmd = { "terramate-ls" },
+  filetypes = { "hcl", "terramate" },
+  root_dir = root_pattern({"terramate.tm.hcl", ".git"}),
+  on_attach = on_attach,
+})
+
+-- Keymaps
+-- Note: opts is undefined in original file, preserving behavior (nil)
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
 vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
 vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
---end
-
-
---require'nvim-treesitter.configs'.setup {
---  highlight = { enable = true },
---  ensure_installed = { "go", "lua", "python", "bash", "json", "yaml" }, -- Add your languages here
---}
 
 require 'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
@@ -186,9 +160,7 @@ if pok then
   })
 end
 
-
-
-require('lspconfig').ccls.setup {
+vim.lsp.config('ccls', {
   on_attach = on_attach,
   init_options = {
     compilationDatabaseDirectory = ".",
@@ -202,5 +174,5 @@ require('lspconfig').ccls.setup {
       directory = vim.fn.expand("~/.cache/ccls"),
     },
   },
-  root_dir = require('lspconfig.util').root_pattern('.ccls', 'compile_commands.json', '.git'),
-}
+  root_dir = root_pattern({'.ccls', 'compile_commands.json', '.git'}),
+})
