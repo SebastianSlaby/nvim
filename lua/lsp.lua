@@ -150,7 +150,8 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.diagnostic.config {
-  virtual_lines = true, -- show inline diagnostic text
+  virtual_text = true, -- show inline diagnostic text at end of line
+  virtual_lines = false, -- disable virtual lines (conflicts with virtual_text)
   signs = true, -- keep gutter signs W/H/etc.
   underline = true, -- underline problematic code
   update_in_insert = false, -- show only in normal mode (optional)
