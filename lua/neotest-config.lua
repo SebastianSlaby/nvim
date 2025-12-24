@@ -30,13 +30,13 @@ neotest.setup {
   },
   output_panel = {
     enabled = true,
-    open = "botright split | resize 15",
+    open = "belowright split | resize 15",
   },
   summary = {
     enabled = true,
     expand_errors = true,
     follow = true,
-    open = "botright split | resize 15",
+    open = "belowright split | resize 15",
     mappings = {
       expand = { "<CR>", "<2-LeftMouse>" },
       expand_all = "e",
