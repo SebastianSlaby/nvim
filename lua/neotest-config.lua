@@ -12,6 +12,10 @@ neotest.setup({
     virtual_text = true,
     signs = true,
   },
+  diagnostic = {
+    enabled = true,
+    severity = vim.diagnostic.severity.ERROR,
+  },
   icons = {
     passed = "✓",
     failed = "✗",
@@ -22,6 +26,10 @@ neotest.setup({
   output = {
     enabled = true,
     open_on_run = false,
+  },
+  output_panel = {
+    enabled = true,
+    open = "botright split | resize 15",
   },
   summary = {
     enabled = true,
@@ -68,15 +76,15 @@ vim.keymap.set("n", "<leader>tt", function()
   neotest.summary.toggle()
 end, { desc = "Neotest: Toggle summary" })
 
--- Toggle test output
+-- Toggle test output at bottom
 vim.keymap.set("n", "<leader>to", function()
-  neotest.output.open({ enter = true, auto_close = true })
+  neotest.output_panel.toggle()
 end, { desc = "Neotest: Toggle output" })
 
 -- Show output panel
 vim.keymap.set("n", "<leader>tp", function()
-  neotest.output_panel.toggle()
-end, { desc = "Neotest: Toggle output panel" })
+  neotest.output.open({ enter = true, auto_close = true })
+end, { desc = "Neotest: Toggle floating output" })
 
 -- Jump to next failed test
 vim.keymap.set("n", "]t", function()
