@@ -70,6 +70,10 @@ nnoremap <C-S-j> :resize -2<CR>
 nnoremap <Space>1 1gt
 nnoremap <Space>2 2gt
 nnoremap <Space>3 3gt
+nnoremap <Space>4 4gt
+nnoremap <Space>5 5gt
+nnoremap <Space>6 6gt
+nnoremap <Space>7 7gt
 
 
 nnoremap <Esc> :noh<CR>
@@ -78,6 +82,11 @@ nnoremap <Esc> :noh<CR>
 
 nnoremap <C-n> :NvimTreeToggle<CR>
 
+nnoremap <leader>? :WhichKey<CR>
+nnoremap <gt> :tabnext<CR>
+nnoremap <gT> :tabprevious<CR>
+nnoremap <leader>g :tabnew<CR>
+nnoremap <leader>q :tabclose<CR>
 nnoremap <leader>w :BD<CR>
 nnoremap <C-.> :ToggleTerm direction=float<CR>
 

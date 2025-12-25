@@ -44,6 +44,9 @@ vim.cmd [[
   Plug 'nvim-neotest/neotest'
   Plug 'fredrikaverpil/neotest-golang'
   Plug 'antoinemadec/FixCursorHold.nvim'
+  Plug 'nvim-mini/mini.nvim'
+  Plug 'MeanderingProgrammer/render-markdown.nvim'
+  Plug 'tiagovla/scope.nvim'
   call plug#end()
 ]]
 
@@ -79,6 +82,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+require("scope").setup {}
 
 local term = lua
 local lga_actions = require "telescope-live-grep-args.actions"
