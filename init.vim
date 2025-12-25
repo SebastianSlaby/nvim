@@ -71,6 +71,9 @@ nnoremap <Space>1 1gt
 nnoremap <Space>2 2gt
 nnoremap <Space>3 3gt
 
+
+nnoremap <Esc> :noh<CR>
+
 " ... etc.
 
 nnoremap <C-n> :NvimTreeToggle<CR>
