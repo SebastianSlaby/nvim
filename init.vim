@@ -86,7 +86,7 @@ nnoremap <leader>? :WhichKey<CR>
 nnoremap <gt> :tabnext<CR>
 nnoremap <gT> :tabprevious<CR>
 nnoremap <leader>g :tabnew<CR>
-nnoremap <leader>q :tabclose<CR>
+nnoremap <leader>p :tabclose<CR>
 nnoremap <leader>w :BD<CR>
 nnoremap <C-.> :ToggleTerm direction=float<CR>
 
