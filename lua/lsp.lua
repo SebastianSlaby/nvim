@@ -104,6 +104,7 @@ local parsers_to_install = {
   "markdown_inline",
   "terraform",
   "hcl",
+  "yaml",
 }
 
 -- Only install if missing to avoid startup messages
