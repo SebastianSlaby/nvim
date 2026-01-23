@@ -25,3 +25,11 @@ end
 
 require "lazy_setup"
 require "polish"
+
+-- custom
+vim.api.nvim_create_autocmd("VimEnter", {
+  command = "set nornu nonu | Neotree toggle",
+})
+vim.api.nvim_create_autocmd("BufEnter", {
+  command = "set rnu nu",
+})
