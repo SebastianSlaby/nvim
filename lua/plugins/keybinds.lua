@@ -17,3 +17,5 @@ vim.keymap.set("n", "<S-Tab>", function()
     vim.cmd "bprevious"
   end
 end, { noremap = true, silent = true })
+
+return {}
